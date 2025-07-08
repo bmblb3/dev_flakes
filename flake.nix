@@ -1,13 +1,35 @@
 {
   inputs = {
-    python_313.url = "./python_313";
-    uv.url = "./uv";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs =
-    { python_313, uv, ... }:
     {
-      python_313 = python_313.outputs;
-      uv = uv.outputs;
-    };
+      self,
+      nixpkgs,
+      flake-utils,
+      ...
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs { inherit system; };
+      in
+      {
+        devShells = {
+          python313 = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              python313
+              python313Packages.pip
+            ];
+          };
+
+          uv = pkgs.mkShell {
+            buildInputs = with pkgs; [ uv ];
+          };
+
+        };
+      }
+    );
 }
