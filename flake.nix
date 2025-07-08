@@ -1,8 +1,18 @@
 {
+  inputs = {
+    python_313.url = "./python_313";
+    uv.url = "./uv";
+  };
+
   outputs =
-    { self }:
     {
-      python_313 = import ./python_313/flake.nix;
-      uv = import ./uv/flake.nix;
+      self,
+      python_313,
+      uv,
+      ...
+    }:
+    {
+      python_313 = python_313.outputs;
+      uv = uv.outputs;
     };
 }
