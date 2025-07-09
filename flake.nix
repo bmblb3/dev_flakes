@@ -18,6 +18,20 @@
       in
       {
         devShells = {
+          python311 = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              python311
+              python311Packages.pip
+            ];
+          };
+
+          python312 = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              python312
+              python312Packages.pip
+            ];
+          };
+
           python313 = pkgs.mkShell {
             buildInputs = with pkgs; [
               python313
