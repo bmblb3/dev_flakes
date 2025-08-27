@@ -43,7 +43,7 @@
             buildInputs = with pkgs; [ uv ];
           };
 
-          cargo = pkgs.mkShell {
+          rust = pkgs.mkShell {
             buildInputs = with pkgs; [
               cargo
               cargo-release
