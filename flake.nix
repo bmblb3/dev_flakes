@@ -43,6 +43,19 @@
             buildInputs = with pkgs; [ uv ];
           };
 
+          cargo = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              cargo
+              cargo-release
+              cargo-semver-checks
+              clippy
+              gcc
+              release-plz
+              rustc
+              rustfmt
+            ];
+          };
+
         };
       }
     );
